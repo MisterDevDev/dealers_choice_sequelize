@@ -41,8 +41,8 @@ const Circuit = db.define('circuit', {
 });
 
 
-Circuit.belongsTo(Application);
-Application.hasMany(Circuit);
+Circuit.belongsTo(Application, {foreignKey: 'appNum', constraints:false, targetKey: 'id'});
+Application.hasMany(Circuit, {foreignKey: 'appNum', constraints:false, sourceKey: 'id'});
 
 const seed = async () => {
     try{

@@ -21,12 +21,15 @@ router.get('/:year', async (req, res, next) => {
         const year = req.params.year
         const appData = await Application.findAll(
             {
+                where: {
+                    fundingYear: year
+                },
                 include: {
                     model: Circuit
             }
             })
 
-        res.send(appData)
+        res.send(apiDetails(appData))
     } catch(err) {
         next(err)
     }
