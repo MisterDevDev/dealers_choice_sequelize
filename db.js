@@ -43,6 +43,9 @@ const Circuit = db.define('circuit', {
 
 Circuit.belongsTo(Application, {foreignKey: 'appNum', constraints:false, targetKey: 'id'});
 Application.hasMany(Circuit, {foreignKey: 'appNum', constraints:false, sourceKey: 'id'});
+Circuit.belongsTo(Circuit, {as: 'primaryWan'});
+Circuit.hasMany(Circuit, {foreignKey: 'primaryWanId'});
+
 
 const seed = async () => {
     try{
@@ -64,6 +67,7 @@ const seed = async () => {
                 })
         }),
         ])
+        
         console.log('Sync and Seed of API Data complete')
     } catch (err) {
         console.log(err)

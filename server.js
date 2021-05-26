@@ -4,6 +4,7 @@ const { seed, models: {Application, Circuit} } = require('./db');
 const app = express();
 
 app.use('/main', require('./routes/api'))
+app.use(express.static('assets'));
 
 app.get('/', (req, res) => {
     res.redirect('/main')
